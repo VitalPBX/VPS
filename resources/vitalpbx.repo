@@ -1,0 +1,17 @@
+[vpbx]
+name=VitalPBX
+baseurl=http://repo.telesoftsa.com/vitalpbxb/rpms/$basearch/
+gpgcheck=0
+enabled=1
+
+[vpbx-addons]
+name=VitalPBX Add-Ons
+baseurl=http://repo.telesoftsa.com/vitalpbx/addons/$basearch/
+gpgcheck=0
+enabled=1
+
+[sonata-suite]
+name=Sonata Suite
+baseurl=http://repo.telesoftsa.com/sonata/rpms/$basearch/
+gpgcheck=0
+enabled=1
