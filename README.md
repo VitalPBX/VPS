@@ -1,5 +1,5 @@
 # VitalPBX VPS
-Scritp and resources to install VitalPBX on VPS Machines
+Script and resources to install VitalPBX on VPS Machines
 
 ### How to Used
 1. **If you don't have installed wget command, install it in the following way**: `yum install wget -y`
