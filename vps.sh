@@ -62,3 +62,7 @@ systemctl start ombutel-dbsetup.service
 # Enable the http access:
 firewall-cmd --add-service=http
 firewall-cmd --reload
+
+# Reboot System to Make Selinux Change Permanently
+echo "Rebooting System"
+reboot
