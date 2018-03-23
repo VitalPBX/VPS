@@ -24,7 +24,11 @@ chmod +x vps.sh
 </pre>
 
 ## Troubleshooting
-1. When apply changes appears the following message: __sudo: unable to open audit system__, this message appears when the SELINUX is enabled, for disabled execute the following comand and then reboot your system:
+1. When apply changes appears the following message: __sudo: unable to open audit system__,
+
+ ![SELINUX ERROR](https://github.com/VitalPBX/VPS/blob/master/resources/selinux.jpg?raw=true)
+
+This message appears when the SELINUX is enabled, for disabled execute the following command and then reboot your system:
 <pre>
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 reboot
