@@ -21,6 +21,7 @@ rm -rf /var/cache/yum
 wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalpbx.repo
 
 #Install SSH Welcome Banner
+rm -rf /etc/profile.d/vitalwelcome.sh
 wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalwelcome.sh
 chmod 644 /etc/profile.d/vitalwelcome.sh
 
