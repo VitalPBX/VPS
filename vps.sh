@@ -2,10 +2,16 @@
 set -e
 
 #Disable Selinux Temporarily
-setenforce 0
+SELINUX_STATUS=$(getenforce)
+if [ "$SELINUX_STATUS" != "Disabled" ]; then
+    echo "Disabling SELINUX Temporarily"
+    setenforce 0
+else
+  echo "SELINUX it is already disabled"
+fi
 
 #Disable SeLinux Permanently
-sed -i 's/(^SELINUX=).*/SELINUX=disabled/' /etc/selinux/config
+sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 
 #Clean Yum Cache
 yum clean all
