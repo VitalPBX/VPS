@@ -11,7 +11,11 @@ else
 fi
 
 #Disable SeLinux Permanently
-sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+sefile="/etc/selinux/config"
+if [ -e $sefile ]
+then
+  sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+fi
 
 #Clean Yum Cache
 yum clean all
