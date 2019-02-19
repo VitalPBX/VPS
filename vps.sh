@@ -30,7 +30,7 @@ wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/re
 chmod 644 /etc/profile.d/vitalwelcome.sh
 
 #Intall other required dependencies
-yum -y install epel-release php-5.4.16-42.el7
+yum -y install epel-release php
 
 # Update the system & Clean Cache Again
 yum clean all
