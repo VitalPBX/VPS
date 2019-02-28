@@ -12,7 +12,7 @@ yum install wget -y
 </pre>
 2. Download the script:
 <pre>
-wget https://raw.githubusercontent.com/VitalPBX/VPS/master/vps.sh
+wget https://raw.githubusercontent.com/VitalPBX/VPS/devel/vps.sh
 </pre>
 3. Set correct permissions to script:
 <pre>
