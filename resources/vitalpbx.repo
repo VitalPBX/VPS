@@ -4,14 +4,38 @@ baseurl=http://repo.telesoftsa.com/vitalpbx/rpms/$basearch/
 gpgcheck=0
 enabled=1
 
+[vpbx-beta]
+name = VitalPBX Beta
+baseurl=http://repo.telesoftsa.com/vitalpbx/rpms/beta/$basearch/
+gpgcheck=0
+enabled=1
+
 [vpbx-addons]
 name=VitalPBX Add-Ons
 baseurl=http://repo.telesoftsa.com/vitalpbx/addons/$basearch/
 gpgcheck=0
 enabled=1
 
+[vpbx-addons-beta]
+name=VitalPBX Add-Ons Beta
+baseurl=http://repo.telesoftsa.com/vitalpbx/addons/beta/$basearch/
+gpgcheck=0
+enabled=1
+
 [sonata-suite]
 name=Sonata Suite
 baseurl=http://repo.telesoftsa.com/sonata/rpms/$basearch/
+gpgcheck=0
+enabled=1
+
+[sonata-suite-beta]
+name=Sonata Suite Beta
+baseurl=http://repo.telesoftsa.com/sonata/rpms/beta/$basearch/
+gpgcheck=0
+enabled=1
+
+[asterisk-sounds]
+name=Asterisk Sounds
+baseurl=http://repo.telesoftsa.com/sounds/rpms/$basearch/
 gpgcheck=0
 enabled=1

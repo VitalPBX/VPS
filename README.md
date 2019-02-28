@@ -1,5 +1,5 @@
-# VitalPBX VPS
-Script and resources to install VitalPBX on VPS Machines
+# VitalPBX VPS (RC or Beta)
+Script and resources to install VitalPBX (RC or Beta Releases) on VPS Machines
 
 - **[How to Used](#how-to-used)**
 - **[Troubleshooting](#troubleshooting)**
@@ -24,15 +24,6 @@ chmod +x vps.sh
 </pre>
 
 ## Troubleshooting
-1. When apply changes appears the following message: __sudo: unable to open audit system__,
-
- ![SELINUX ERROR](https://github.com/VitalPBX/VPS/blob/master/resources/selinux.jpg?raw=true)
-
-This message appears when the SELINUX is enabled, for disabled execute the following command and then reboot your system:
-<pre>
-sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
-reboot
-</pre>
 
 ## Important Note
 VitalPBX is not working with OpenVZ based VPS, please, use KVM based VPS.
