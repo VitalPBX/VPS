@@ -60,8 +60,8 @@ chown -R apache:root /etc/asterisk/ombutel
 # Restart httpd
 systemctl restart httpd
 
-#Start ombutel-dbsetup
-systemctl start ombutel-dbsetup.service
+#Start vpbx-setup.service
+systemctl start vpbx-setup.service
 
 # Enable the http access:
 firewall-cmd --add-service=http
