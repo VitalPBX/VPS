@@ -22,6 +22,7 @@ yum clean all
 rm -rf /var/cache/yum
 
 #Download the beta repo of VitalPBX
+rm -rf /etc/yum.repos.d/vitalpbx.repo
 wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalpbx.repo
 
 #Install SSH Welcome Banner
