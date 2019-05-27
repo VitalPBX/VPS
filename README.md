@@ -1,5 +1,5 @@
 # VitalPBX VPS
-Script and resources to install VitalPBX on VPS Machines with Centos 7 (x86_64)
+Script and resources to install VitalPBX on VPS Machines with **Centos 7 (x86_64)**
 
 - **[How to Used](#how-to-used)**
 - **[Troubleshooting](#troubleshooting)**
