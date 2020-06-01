@@ -21,13 +21,13 @@ fi
 yum clean all
 rm -rf /var/cache/yum
 
-#Download the beta repo of VitalPBX
+#Download the VitalPBX's repo
 rm -rf /etc/yum.repos.d/vitalpbx.repo
-wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalpbx.repo
+wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-3/resources/vitalpbx.repo
 
 #Install SSH Welcome Banner
 rm -rf /etc/profile.d/vitalwelcome.sh
-wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalwelcome.sh
+wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-3/resources/vitalwelcome.sh
 chmod 644 /etc/profile.d/vitalwelcome.sh
 
 #Intall other required dependencies
@@ -39,31 +39,31 @@ rm -rf /var/cache/yum
 yum -y update
 
 #Install MariaDB (MySQL)
-yum install mariadb-server -y
+yum install MariaDB-server MariaDB-client MariaDB-common MariaDB-compat mariadb-connector-odbc -y
 systemctl enable mariadb
-rm -rf /etc/my.cnf.d/ombutel.cnf
-wget -P /etc/my.cnf.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/ombutel.cnf
+rm -rf /etc/my.cnf.d/vitalpbx.cnf
+wget -P /etc/my.cnf.d/ https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-3/resources/vitalpbx.cnf
 systemctl start mariadb
 
 # Install VitalPBX pre-requisites
-wget https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/pack_list
+wget https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-3/resources/pack_list
 yum -y install $(cat pack_list)
 
 # Install VitalPBX
-mkdir -p /etc/ombutel
-mkdir -p /etc/asterisk/ombutel
-yum -y install vitalpbx vitalpbx-asterisk-configs vitalpbx-fail2ban-config vitalpbx-sounds vitalpbx-themes dahdi-linux dahdi-tools dahdi-tools-doc kmod-dahdi-linux fxload
+mkdir -p /etc/vitalpbx
+mkdir -p /etc/asterisk/vitalpbx
+yum -y install vitalpbx vitalpbx-asterisk-configs vitalpbx-fail2ban-config vitalpbx-sounds vitalpbx-themes
 
 # Speed up the localhost name resolving
 sed -i 's/^hosts.*$/hosts:      myhostname files dns/' /etc/nsswitch.conf
 
-cat << EOF >> /etc/sysctl.d/10-ombutel.conf
+cat << EOF >> /etc/sysctl.d/10-vitalpbx.conf
 # Reboot machine automatically after 20 seconds if it kernel panics
 kernel.panic = 20
 EOF
 
 # Set permissions
-chown -R apache:root /etc/asterisk/ombutel
+chown -R apache:root /etc/asterisk/vitalpbx
 
 # Restart httpd
 systemctl restart httpd

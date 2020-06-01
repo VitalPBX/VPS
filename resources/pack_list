@@ -23,8 +23,11 @@ httpd-tools
 ipset
 lame
 libxml2-devel
-mariadb
-mariadb-server
+MariaDB-server
+MariaDB-client
+MariaDB-common
+MariaDB-compat
+mariadb-connector-odbc
 mc
 mdadm
 nss-mdns

@@ -1,17 +1,29 @@
-[vpbx]
-name=VitalPBX
-baseurl=http://repo.vitalpbx.org/vitalpbx/rpms/$basearch/
+[vpbx-base]
+name=VitalPBX Base
+baseurl=http://repo.vitalpbx.org/vitalpbx/v3/base/rpms/$basearch/
 gpgcheck=0
 enabled=1
 
-[vpbx-addons]
-name=VitalPBX Add-Ons
-baseurl=http://repo.vitalpbx.org/vitalpbx/addons/$basearch/
+[vpbx-core]
+name=VitalPBX Core
+baseurl=http://repo.vitalpbx.org/vitalpbx/v3/core/rpms/$basearch/
+gpgcheck=0
+enabled=1
+
+[vpbx-extras]
+name=VitalPBX Extras
+baseurl=http://repo.vitalpbx.org/vitalpbx/v3/extras/rpms/$basearch/
 gpgcheck=0
 enabled=1
 
 [sonata-suite]
 name=Sonata Suite
-baseurl=http://repo.vitalpbx.org/sonata/rpms/$basearch/
+baseurl=http://repo.vitalpbx.org/vitalpbx/v3/sonata/rpms/$basearch/
+gpgcheck=0
+enabled=1
+
+[asterisk-sounds]
+name=Asterisk Sounds
+baseurl=http://repo.vitalpbx.org/sounds/rpms/$basearch/
 gpgcheck=0
 enabled=1
