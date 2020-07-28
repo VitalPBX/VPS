@@ -49,6 +49,10 @@ systemctl start mariadb
 wget https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-3/resources/pack_list
 yum -y install $(cat pack_list)
 
+# Enable and Start Firewall
+systemctl enable firewalld
+systemctl start firewalld
+
 # Install VitalPBX
 mkdir -p /etc/vitalpbx
 mkdir -p /etc/asterisk/vitalpbx
