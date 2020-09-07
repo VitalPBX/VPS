@@ -4,6 +4,12 @@ baseurl=http://repo.vitalpbx.org/vitalpbx/rpms/$basearch/
 gpgcheck=0
 enabled=1
 
+[vpbx-updates]
+name=VitalPBX Updates
+baseurl=http://repo.vitalpbx.org/vitalpbx/v2/rpms/$basearch/
+gpgcheck=0
+enabled=1
+
 [vpbx-addons]
 name=VitalPBX Add-Ons
 baseurl=http://repo.vitalpbx.org/vitalpbx/addons/$basearch/
@@ -13,5 +19,11 @@ enabled=1
 [sonata-suite]
 name=Sonata Suite
 baseurl=http://repo.vitalpbx.org/sonata/rpms/$basearch/
+gpgcheck=0
+enabled=1
+
+[asterisk-sounds]
+name=Asterisk Sounds
+baseurl=http://repo.vitalpbx.org/sounds/rpms/$basearch/
 gpgcheck=0
 enabled=1
