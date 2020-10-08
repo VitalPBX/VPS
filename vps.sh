@@ -1,80 +1,78 @@
 #!/bin/bash
+
 set -e
 
-#Disable Selinux Temporarily
-SELINUX_STATUS=$(getenforce)
-if [ "$SELINUX_STATUS" != "Disabled" ]; then
-    echo "Disabling SELINUX Temporarily"
-    setenforce 0
-else
-  echo "SELINUX it is already disabled"
-fi
+die() {
+	echo "${1}"
+	exit 1
+}
 
-#Disable SeLinux Permanently
-sefile="/etc/selinux/config"
-if [ -e $sefile ]
+# Check if it is really CentOS 7
+if [ "$( rpm --eval %{centos_ver} )" != "7" ]
 then
-  sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+	die "This is not CentOS 7"
 fi
 
-#Clean Yum Cache
-yum clean all
-rm -rf /var/cache/yum
+# Disable Selinux Temporarily
+if [ "$( getenforce )" != "Enforcing" ]
+then
+	echo "Disabling SELINUX Temporarily"
+	setenforce 0 || die "sentenforce failed"
+	sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config || die "failed to disable selinux"
+fi
 
-#Download the beta repo of VitalPBX
-rm -rf /etc/yum.repos.d/vitalpbx.repo
-wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalpbx.repo
+# Download the beta repo of VitalPBX
+curl -s -q https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalpbx.repo -o /etc/yum.repos.d/vitalpbx.repo || die "failed to get vitalpbx.repo"
 
-#Install SSH Welcome Banner
+# Install SSH Welcome Banner
 rm -rf /etc/profile.d/vitalwelcome.sh
-wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalwelcome.sh
-chmod 644 /etc/profile.d/vitalwelcome.sh
+curl -s -q https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalwelcome.sh -o /etc/profile.d/vitalwelcome.sh || die "failed to get vitalwelcome.sh"
+chmod 644 /etc/profile.d/vitalwelcome.sh || die "failed to chmod vitalwelcome.sh"
 
-#Intall other required dependencies
-yum -y install epel-release php
+# Update the system
+yum update -y || die "failed to yum update"
 
-# Update the system & Clean Cache Again
-yum clean all
-rm -rf /var/cache/yum
-yum -y update
+# Install required dependencies
+yum install -y epel-release php mariadb-server || die "failed to yum install"
 
-#Install MariaDB (MySQL)
-yum install mariadb-server -y
-systemctl enable mariadb
-rm -rf /etc/my.cnf.d/ombutel.cnf
-wget -P /etc/my.cnf.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/ombutel.cnf
-systemctl start mariadb
+# Download ombutel.cnf & start mariadb
+## Important: if mariadb is already running before download ombutel.cnf, a restart will fail so we need to drop /var/lib/mysql/*
+if [ "$( systemctl is-active mariadb )" = "active" ]
+then
+	systemctl stop mariadb || die "failed to stop mariadb"
+	rm -fr /var/lib/mysql/* || die "failed to rm /var/lib/mysql/*"
+fi
+curl -s -q https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/ombutel.cnf -o /etc/my.cnf.d/ombutel.cnf || die "failed to get ombutel.cnf"
+systemctl start mariadb || die "failed to start mariadb"
+systemctl enable mariadb || die "failed to enable mariadb" # --now works only with systemd-220 https://unix.stackexchange.com/a/416736
 
 # Install VitalPBX pre-requisites
-wget https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/pack_list
-yum -y install $(cat pack_list)
+yum install -y $( curl -s -q https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/pack_list ) || die "failed to yum install"
 
 # Install VitalPBX
-mkdir -p /etc/ombutel
-mkdir -p /etc/asterisk/ombutel
-yum -y install vitalpbx vitalpbx-asterisk-configs vitalpbx-fail2ban-config vitalpbx-sounds vitalpbx-themes dahdi-linux dahdi-tools dahdi-tools-doc kmod-dahdi-linux fxload
+mkdir -p /etc/ombutel /etc/asterisk/ombutel
+yum install -y vitalpbx vitalpbx-asterisk-configs vitalpbx-fail2ban-config vitalpbx-sounds vitalpbx-themes dahdi-linux dahdi-tools dahdi-tools-doc kmod-dahdi-linux fxload || die "failed to yum install"
 
 # Speed up the localhost name resolving
-sed -i 's/^hosts.*$/hosts:      myhostname files dns/' /etc/nsswitch.conf
+sed -i 's/^hosts.*$/hosts:      myhostname files dns/' /etc/nsswitch.conf || die "failed to sed /etc/nsswitch.conf"
 
 cat << EOF >> /etc/sysctl.d/10-ombutel.conf
 # Reboot machine automatically after 20 seconds if it kernel panics
 kernel.panic = 20
 EOF
 
+# Apply the sysctl conf
+sysctl -p || die "failed to run sysctl"
+
 # Set permissions
-chown -R apache:root /etc/asterisk/ombutel
+chown -R apache:root /etc/asterisk/ombutel || die "failed to chown /etc/asterisk/ombutel"
 
 # Restart httpd
-systemctl restart httpd
+systemctl restart httpd || die "failed to restart httpd"
 
-#Start vpbx-setup.service
-systemctl start vpbx-setup.service
+# Start vpbx-setup.service
+systemctl start vpbx-setup.service || die "failed to start vpbx-setup"
 
 # Enable the http access:
-firewall-cmd --add-service=http
-firewall-cmd --reload
-
-# Reboot System to Make Selinux Change Permanently
-echo "Rebooting System"
-reboot
+firewall-cmd --add-service=http || die "failed to run firewall-cmd 1"
+firewall-cmd --reload || die "failed to run firewall-cmd 2"

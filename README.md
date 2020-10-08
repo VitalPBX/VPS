@@ -6,22 +6,17 @@ Script and resources to install VitalPBX on VPS Machines with **Centos 7 (x86_64
 - **[Important Note](#important-note)**
 
 ## How to Used
-1. If you don't have installed __wget__ command, install it in the following way:
+1. __curl__ is installed by default on CentOS 7, if you don't have it installed, install it in the following way:
 <pre>
-yum install wget -y
+yum install -y curl
 </pre>
-2. Download the script:
+2. Download and execute the script:
 <pre>
-wget https://raw.githubusercontent.com/VitalPBX/VPS/master/vps.sh
+curl -s -q https://raw.githubusercontent.com/VitalPBX/VPS/master/vps.sh | bash
 </pre>
-3. Set correct permissions to script:
-<pre>
-chmod +x vps.sh
-</pre>
-4. Excute the script to install VitalPBX on VPS:
-<pre>
-./vps.sh
-</pre>
+
+## Important
+Since we add some mysql/mariadb configurations, if you have a running instance of the daemon __we will drop the databases__, otherwise mariadb will fail to restart.
 
 ## Troubleshooting
 1. When apply changes appears the following message: __sudo: unable to open audit system__,
