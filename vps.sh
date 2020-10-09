@@ -23,11 +23,11 @@ rm -rf /var/cache/yum
 
 #Download the beta repo of VitalPBX
 rm -rf /etc/yum.repos.d/vitalpbx.repo
-wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalpbx.repo
+wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-2/resources/vitalpbx.repo
 
 #Install SSH Welcome Banner
 rm -rf /etc/profile.d/vitalwelcome.sh
-wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/vitalwelcome.sh
+wget -P /etc/profile.d/ https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-2/resources/vitalwelcome.sh
 chmod 644 /etc/profile.d/vitalwelcome.sh
 
 #Intall other required dependencies
@@ -42,11 +42,11 @@ yum -y update
 yum install mariadb-server -y
 systemctl enable mariadb
 rm -rf /etc/my.cnf.d/ombutel.cnf
-wget -P /etc/my.cnf.d/ https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/ombutel.cnf
+wget -P /etc/my.cnf.d/ https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-2/resources/ombutel.cnf
 systemctl start mariadb
 
 # Install VitalPBX pre-requisites
-wget https://raw.githubusercontent.com/VitalPBX/VPS/master/resources/pack_list
+wget https://raw.githubusercontent.com/VitalPBX/VPS/vitalpbx-2/resources/pack_list
 yum -y install $(cat pack_list)
 
 # Install VitalPBX
