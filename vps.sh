@@ -55,13 +55,17 @@ systemctl start firewalld
 #Downgrade some packages to avoid asterisk issues
 yum downgrade glibc-2.17-317.el7 glibc-common-2.17-317.el7 glibc-devel-2.17-317.el7 glibc-headers-2.17-317.el7 -y
 
+# Clean Cache Again
+yum clean all
+rm -rf /var/cache/yum
+
 # Install VitalPBX
 mkdir -p /etc/vitalpbx
 mkdir -p /etc/asterisk/vitalpbx
 yum -y install vitalpbx vitalpbx-asterisk-configs vitalpbx-fail2ban-config vitalpbx-sounds vitalpbx-themes
 
-# Do a full update
-yum -y update
+# Do a full update and skip some packages
+yum update -x glibc,glibc-common,glibc-devel,glibc-headers -y
 
 # Speed up the localhost name resolving
 sed -i 's/^hosts.*$/hosts:      myhostname files dns/' /etc/nsswitch.conf
