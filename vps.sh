@@ -52,6 +52,9 @@ yum -y install $(cat pack_list)
 systemctl enable firewalld
 systemctl start firewalld
 
+#Downgrade some packages to avoid asterisk issues
+yum downgrade glibc-2.17-317.el7 glibc-common-2.17-317.el7 glibc-devel-2.17-317.el7 glibc-headers-2.17-317.el7
+
 # Install VitalPBX
 mkdir -p /etc/vitalpbx
 mkdir -p /etc/asterisk/vitalpbx
