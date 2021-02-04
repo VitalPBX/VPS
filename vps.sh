@@ -53,7 +53,7 @@ systemctl enable firewalld
 systemctl start firewalld
 
 #Downgrade some packages to avoid asterisk issues
-yum downgrade glibc-2.17-317.el7 glibc-common-2.17-317.el7 glibc-devel-2.17-317.el7 glibc-headers-2.17-317.el7
+yum downgrade glibc-2.17-317.el7 glibc-common-2.17-317.el7 glibc-devel-2.17-317.el7 glibc-headers-2.17-317.el7 -y
 
 # Install VitalPBX
 mkdir -p /etc/vitalpbx
