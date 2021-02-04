@@ -33,10 +33,9 @@ chmod 644 /etc/profile.d/vitalwelcome.sh
 #Intall other required dependencies
 yum -y install epel-release php
 
-# Update the system & Clean Cache Again
+# Clean Cache Again
 yum clean all
 rm -rf /var/cache/yum
-yum -y update
 
 #Install MariaDB (MySQL)
 yum install MariaDB-server MariaDB-client MariaDB-common MariaDB-compat mariadb-connector-odbc -y
@@ -57,6 +56,9 @@ systemctl start firewalld
 mkdir -p /etc/vitalpbx
 mkdir -p /etc/asterisk/vitalpbx
 yum -y install vitalpbx vitalpbx-asterisk-configs vitalpbx-fail2ban-config vitalpbx-sounds vitalpbx-themes
+
+# Do a full update
+yum -y update
 
 # Speed up the localhost name resolving
 sed -i 's/^hosts.*$/hosts:      myhostname files dns/' /etc/nsswitch.conf
