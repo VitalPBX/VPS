@@ -1,11 +1,24 @@
-# VitalPBX 3 VPS
-Script and resources to install VitalPBX on VPS Machines with **Centos 7 (x86_64)**
+# ![Debian](https://www.debian.org/logos/openlogo-nd-100.png "Debian 11") VitalPBX 4 (Debian 11)
+Instructions for installing VitalPBX 4 on VPS machines running Debian 11.
 
-- **[How to Used](#how-to-used)**
-- **[Troubleshooting](#troubleshooting)**
-- **[Important Note](#important-note)**
+1. Download the installation script
+```console
+wget https://repo.vitalpbx.com/vitalpbx/v4/apt/debian_vpbx_installer.sh
+```
+2. Give it execute permissions
+```console
+chmod +x debian_vpbx_installer.sh
+```
+3. Run the script
+```console
+./debian_vpbx_installer.sh
+```
+***
 
-## How to Used
+# ![Centos 7](https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/CentOS_color_logo.svg/120px-CentOS_color_logo.svg.png "Centos 7") VitalPBX 3 (Centos 7)
+
+Instructions for installing VitalPBX 3 on VPS machines running Centos 7.
+
 1. If you don't have installed __wget__ command, install it in the following way:
 <pre>
 yum install wget -y
@@ -22,9 +35,6 @@ chmod +x vps.sh
 <pre>
 ./vps.sh
 </pre>
-
-## Troubleshooting
-
 
 ## Important Note
 VitalPBX is not working with OpenVZ based VPS, please, use KVM based VPS.
