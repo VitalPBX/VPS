@@ -1,21 +1,25 @@
-# ![Debian](https://www.debian.org/logos/openlogo-nd-100.png "Debian 11") VitalPBX 4 (Debian 11)
-Instructions for installing VitalPBX 4 on VPS machines running Debian 11.
+<div style="display: flex; align-items: center;">
+    <img src="https://www.debian.org/Pics/debian-logo-1024x576.png" alt="Debian 11" title="Debian 11" width="300" style="margin-right: 10px;" />
+    <h1 style="display: inline">VitalPBX 4 & 4.5 (Debian 11 & 12)</h1>
+</div>
+
+Instructions for installing VitalPBX 4(Debian 11) or 4.5(Debian 12) on VPS machines.
 
 1. Download the installation script
 ```console
-wget https://repo.vitalpbx.com/vitalpbx/v4/apt/debian_vpbx_installer.sh
+wget https://repo.vitalpbx.com/vitalpbx/v4.5/pbx_installer.sh
 ```
 2. Give it execute permissions
 ```console
-chmod +x debian_vpbx_installer.sh
+chmod +x pbx_installer.sh
 ```
 3. Run the script
 ```console
-./debian_vpbx_installer.sh
+./pbx_installer.sh
 ```
 ***
 
-# ![Centos 7](https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/CentOS_color_logo.svg/120px-CentOS_color_logo.svg.png "Centos 7") VitalPBX 3 (Centos 7)
+# ![Centos 7](https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/CentOS_color_logo.svg/120px-CentOS_color_logo.svg.png "Centos 7") VitalPBX 3 (Centos 7) - ⚠️ <span style="color: red;">DEPRECATED</span>
 
 Instructions for installing VitalPBX 3 on VPS machines running Centos 7.
 
