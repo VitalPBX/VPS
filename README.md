@@ -5,15 +5,23 @@
 
 Instructions for installing VitalPBX 4(Debian 11) or 4.5(Debian 12) on VPS machines.
 
-1. Download the installation script
+1. Escalate privileges if needed
+```console
+su -
+```
+2. Install dependencies
+```console
+apt install -y wget sudo
+``` 
+3. Download the installation script
 ```console
 wget https://repo.vitalpbx.com/vitalpbx/v4.5/pbx_installer.sh
 ```
-2. Give it execute permissions
+4. Give it execute permissions
 ```console
 chmod +x pbx_installer.sh
 ```
-3. Run the script
+5. Run the script
 ```console
 ./pbx_installer.sh
 ```
